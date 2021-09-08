@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import AddTodo from './components/AddTodo'
 import Footer from './components/Footer'
@@ -10,15 +10,6 @@ export const VisibilityFilters = {
   SHOW_ALL: 'SHOW_ALL',
   SHOW_COMPLETED: 'SHOW_COMPLETED',
   SHOW_ACTIVE: 'SHOW_ACTIVE',
-}
-
-type State = {
-  todos: {
-    id: number
-    completed: boolean
-    text: string
-  }[]
-  filter: string
 }
 
 const getVisibleTodos = (
@@ -41,60 +32,34 @@ const getVisibleTodos = (
   }
 }
 
-class App extends React.Component<unknown, State> {
-  constructor(props: any) {
-    super(props)
+const App = () => {
+  const [todos, setTodos] = useState<{ id: number; completed: boolean; text: string }[]>(
+    [],
+  )
 
-    this.state = {
-      todos: [],
-      filter: VisibilityFilters.SHOW_ALL,
-    }
+  const [filter, setFilter] = useState<string>(VisibilityFilters.SHOW_ALL)
 
-    this.toggleTodo = this.toggleTodo.bind(this)
-    this.onSubmit = this.onSubmit.bind(this)
-    this.setVisibilityFilter = this.setVisibilityFilter.bind(this)
-  }
-
-  toggleTodo(id: number) {
-    const { todos } = this.state
-
-    this.setState({
-      todos: todos.map((todo) =>
+  const toggleTodo = (id: number) => {
+    setTodos(
+      todos.map((todo) =>
         todo.id === id ? { ...todo, completed: !todo.completed } : todo,
       ),
-    })
-  }
-
-  onSubmit(value: string) {
-    this.setState({
-      todos: [
-        ...this.state.todos,
-        {
-          id: nextTodoId++,
-          text: value,
-          completed: false,
-        },
-      ],
-    })
-  }
-
-  setVisibilityFilter(filter: string) {
-    this.setState({
-      filter: filter,
-    })
-  }
-
-  render() {
-    const { todos, filter } = this.state
-
-    return (
-      <div>
-        <AddTodo onSubmit={this.onSubmit} />
-        <TodoList todos={getVisibleTodos(todos, filter)} toggleTodo={this.toggleTodo} />
-        <Footer filter={filter} setVisibilityFilter={this.setVisibilityFilter} />
-      </div>
     )
   }
+
+  const onSubmit = (value: string) => {
+    setTodos([...todos, { id: nextTodoId++, text: value, completed: false }])
+  }
+
+  const setVisibilityFilter = (filter: string) => setFilter(filter)
+
+  return (
+    <div>
+      <AddTodo onSubmit={onSubmit} />
+      <TodoList todos={getVisibleTodos(todos, filter)} toggleTodo={toggleTodo} />
+      <Footer filter={filter} setVisibilityFilter={setVisibilityFilter} />
+    </div>
+  )
 }
 
 export default App
