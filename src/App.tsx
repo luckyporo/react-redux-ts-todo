@@ -53,11 +53,20 @@ const App = () => {
 
   const setVisibilityFilter = (filter: string) => setFilter(filter)
 
+  const visibleTodos = getVisibleTodos(todos, filter)
+
   return (
-    <div>
+    <div className="flex flex-col w-1/2 mx-auto bg-white rounded-lg shadow-md">
+      <div className="text-center py-5 mb-5">
+        <h2 className="text-2xl text-gray-900 font-medium">TODO</h2>
+      </div>
       <AddTodo onSubmit={onSubmit} />
-      <TodoList todos={getVisibleTodos(todos, filter)} toggleTodo={toggleTodo} />
-      <Footer filter={filter} setVisibilityFilter={setVisibilityFilter} />
+      <TodoList todos={visibleTodos} toggleTodo={toggleTodo} />
+      <Footer
+        total={visibleTodos.length}
+        filter={filter}
+        setVisibilityFilter={setVisibilityFilter}
+      />
     </div>
   )
 }

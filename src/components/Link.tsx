@@ -10,9 +10,7 @@ const Link = ({ active, children, onClick }: Props) => (
   <button
     onClick={onClick}
     disabled={active}
-    style={{
-      marginLeft: '4px',
-    }}>
+    className={'p-1 mx-4 rounded ' + (active ? 'border border-blue-500' : '')}>
     {children}
   </button>
 )
