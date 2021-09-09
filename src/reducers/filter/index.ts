@@ -10,7 +10,7 @@ export const VisibilityFilters = {
 
 const initialState: string = VisibilityFilters.SHOW_ALL
 
-const filterReducer: Reducer<string, FilterActionTypes> = (
+const FilterReducer: Reducer<string, FilterActionTypes> = (
   state = initialState,
   action,
 ) => {
@@ -25,4 +25,4 @@ const filterReducer: Reducer<string, FilterActionTypes> = (
   })
 }
 
-export default filterReducer
+export default FilterReducer

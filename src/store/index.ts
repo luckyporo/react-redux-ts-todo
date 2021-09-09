@@ -1,11 +1,16 @@
-import { applyMiddleware, compose, createStore } from 'redux'
-import thunk from 'redux-thunk'
+import { configureStore } from '@reduxjs/toolkit'
+import FilterReducer from 'src/slices/filter'
+import TodoReducer from 'src/slices/todo'
 
-import rootReducer from '../reducers'
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
-
-const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
+const store = configureStore({
+  reducer: {
+    todos: TodoReducer,
+    filter: FilterReducer,
+  },
+})
 
 export default store
+
+export type RootState = ReturnType<typeof store.getState>
+
+export type AppDispatch = typeof store.dispatch
