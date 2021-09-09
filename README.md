@@ -8,10 +8,10 @@ React/Redux/Immer/Redux Toolkit/Tailwind
 
 ## 说明
 
-[x] react分支：纯React实现的TODO
+- [x] react分支：纯React实现的TODO
 
-[x] redux分支：使用Redux重构的TODO
+- [x] redux分支：使用Redux重构的TODO
 
-[ ] redux+immer：使用Redux+immer+thunk进一步的练习
+- [ ] redux+immer：使用Redux+immer+thunk进一步的练习
 
-[ ] rtk：使用更加现代化的Redux开发方式完成练习
+- [ ] rtk：使用更加现代化的Redux开发方式完成练习
