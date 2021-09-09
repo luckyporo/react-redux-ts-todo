@@ -1,10 +1,10 @@
 import React from 'react'
 
-type Props = {
-  onSubmit: (value: string) => void
+export type Props = {
+  addTodo: (text: string) => void
 }
 
-const AddTodo = ({ onSubmit }: Props) => {
+const AddTodo = ({ addTodo }: Props) => {
   let input: HTMLInputElement | null
 
   return (
@@ -15,7 +15,7 @@ const AddTodo = ({ onSubmit }: Props) => {
         if (!input?.value.trim()) {
           return
         }
-        onSubmit(input.value)
+        addTodo(input.value)
         input.value = ''
       }}>
       <input

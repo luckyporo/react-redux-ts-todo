@@ -1,13 +1,10 @@
 import React from 'react'
+import { TodoState } from 'src/reducers/todo/types'
 
 import Todo from './Todo'
 
 type Props = {
-  todos: {
-    id: number
-    completed: boolean
-    text: string
-  }[]
+  todos: TodoState[]
   toggleTodo: (id: number) => void
 }
 
