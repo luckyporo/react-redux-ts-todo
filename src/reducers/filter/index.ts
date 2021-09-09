@@ -1,3 +1,4 @@
+import produce from 'immer'
 import { Reducer } from 'redux'
 import { FilterActionTypes } from 'src/actions/filter/types'
 
@@ -13,12 +14,15 @@ const filterReducer: Reducer<string, FilterActionTypes> = (
   state = initialState,
   action,
 ) => {
-  switch (action.type) {
-    case 'SET_VISIBILITY_FILTER':
-      return action.filter
-    default:
-      return state
-  }
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case 'SET_VISIBILITY_FILTER':
+        draft = action.filter
+        return draft
+      default:
+        return draft
+    }
+  })
 }
 
 export default filterReducer

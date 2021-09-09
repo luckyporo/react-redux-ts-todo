@@ -1,3 +1,4 @@
+import produce from 'immer'
 import { Reducer } from 'redux'
 import * as actionTypes from 'src/actions/todo/types'
 import { TodoActionTypes } from 'src/actions/todo/types'
@@ -10,23 +11,23 @@ const TodoReducer: Reducer<TodoState[], TodoActionTypes> = (
   state = initialState,
   action,
 ) => {
-  switch (action.type) {
-    case actionTypes.ADD_TODO:
-      return [
-        ...state,
-        {
+  return produce(state, (draft) => {
+    switch (action.type) {
+      case actionTypes.ADD_TODO:
+        draft.push({
           id: action.id,
           text: action.text,
           completed: false,
-        },
-      ]
-    case actionTypes.TOGGLE_TODO:
-      return state.map((todo) =>
-        todo.id === action.id ? { ...todo, completed: !todo.completed } : todo,
-      )
-    default:
-      return state
-  }
+        })
+        break
+      case actionTypes.TOGGLE_TODO:
+        {
+          const target = draft.find((todo) => todo.id === action.id)
+          if (target) target.completed = !target.completed
+        }
+        break
+    }
+  })
 }
 
 export default TodoReducer
