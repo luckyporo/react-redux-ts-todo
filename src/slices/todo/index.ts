@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { RootState } from 'src/store'
 
 import { TodoState } from './types'
 
@@ -28,8 +29,8 @@ export const todoSlice = createSlice({
   name: 'todo',
   initialState,
   reducers: {
-    toggleTodo: (state, action: PayloadAction<TodoState>) => {
-      const target = state.find((todo) => todo.id === action.payload.id)
+    toggleTodo: (state, action: PayloadAction<number>) => {
+      const target = state.find((todo) => todo.id === action.payload)
       if (target) target.completed = !target.completed
     },
   },
@@ -42,5 +43,9 @@ export const todoSlice = createSlice({
     },
   },
 })
+
+export const { toggleTodo } = todoSlice.actions
+
+export const selectTodo = (state: RootState) => state.todos
 
 export default todoSlice.reducer

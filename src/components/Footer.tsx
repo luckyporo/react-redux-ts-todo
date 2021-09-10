@@ -1,6 +1,6 @@
 import React from 'react'
 import FilterLink from 'src/containers/FilterLink'
-import { VisibilityFilters } from 'src/reducers/filter'
+import { VisibilityFilters } from 'src/slices/filter'
 
 const Footer = () => (
   <div className="mx-4 my-2 p-2 flex items-center">

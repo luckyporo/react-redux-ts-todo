@@ -2,7 +2,7 @@ import React from 'react'
 
 type Props = {
   active: boolean
-  children: React.ReactNode
+  children?: React.ReactNode
   onClick: () => void
 }
 

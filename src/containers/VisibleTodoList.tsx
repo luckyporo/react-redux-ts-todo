@@ -1,12 +1,8 @@
-import { connect } from 'react-redux'
-import { Dispatch } from 'redux'
-import { toggleTodo } from 'src/actions/todo'
-import { ToggleTodoAction } from 'src/actions/todo/types'
 import TodoList from 'src/components/TodoList'
-import { VisibilityFilters } from 'src/reducers/filter'
-import { TodoState } from 'src/reducers/todo/types'
-
-import { RootState } from '../reducers'
+import { selectFilter, VisibilityFilters } from 'src/slices/filter'
+import { selectTodo, toggleTodo } from 'src/slices/todo'
+import { TodoState } from 'src/slices/todo/types'
+import { useAppDispatch, useAppSelector } from 'src/store/hook'
 
 const getVisibleTodos = (todos: TodoState[], filter: string) => {
   switch (filter) {
@@ -21,12 +17,16 @@ const getVisibleTodos = (todos: TodoState[], filter: string) => {
   }
 }
 
-const mapStateToProps = (state: RootState) => ({
-  todos: getVisibleTodos(state.todos, state.filter),
-})
+const VisibleTodoList = () => {
+  const todo = useAppSelector(selectTodo)
+  const filter = useAppSelector(selectFilter)
+  const dispatch = useAppDispatch()
 
-const mapDispatchToProps = (dispatch: Dispatch<ToggleTodoAction>) => ({
-  toggleTodo: (id: number) => dispatch(toggleTodo(id)),
-})
+  return (
+    <TodoList
+      todos={getVisibleTodos(todo, filter)}
+      toggleTodo={(id: number) => dispatch(toggleTodo(id))}></TodoList>
+  )
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
+export default VisibleTodoList

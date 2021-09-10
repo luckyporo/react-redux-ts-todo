@@ -1,14 +1,17 @@
-import { connect } from 'react-redux'
-import { addTodo } from 'src/actions/todo'
-import { RootState } from 'src/reducers'
+import { addTodo } from 'src/slices/todo'
+import { useAppDispatch } from 'src/store/hook'
 
 import AddTodo from '../components/AddTodo'
 
-const mapStateToProps = (state: RootState) => state
+const AddTodoContainer = () => {
+  const dispatch = useAppDispatch()
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const mapDispatchToProps = (dispatch: any) => ({
-  addTodo: (text: string) => dispatch(addTodo(text)),
-})
+  return (
+    <AddTodo
+      addTodo={(text: string) => {
+        dispatch(addTodo(text))
+      }}></AddTodo>
+  )
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddTodo)
+export default AddTodoContainer

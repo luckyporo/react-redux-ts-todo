@@ -1,5 +1,5 @@
 import React from 'react'
-import { TodoState } from 'src/reducers/todo/types'
+import { TodoState } from 'src/slices/todo/types'
 
 import Todo from './Todo'
 
