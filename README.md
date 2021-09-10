@@ -14,4 +14,4 @@ TypeScript/React/Redux/Immer/Redux Toolkit/Tailwind
 
 - [x] immer：使用Redux+immer+thunk进一步的练习
 
-- [ ] rtk：使用更加现代化的Redux开发方式完成练习
+- [x] rtk：使用更加现代化的Redux开发方式完成练习
